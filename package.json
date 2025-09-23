@@ -1,0 +1,22 @@
+{
+  "name": "com.devpeixoto.globaluievents",
+  "version": "0.0.1",
+  "displayName": "Global UI Events",
+  "description": "",
+  "unity": "6000.0",
+  "documentationUrl": "https://github.com/FellipePeixoto/GlobalUiEvents",
+  "changelogUrl": "https://github.com/FellipePeixoto/GlobalUiEvents/blob/master/CHANGELOG.md",
+  "licensesUrl": "https://github.com/FellipePeixoto/GlobalUiEvents/blob/master/LICENSE",
+  "keywords": [
+    "devpeixoto",
+    "Fellipe Peixoto",
+    "UI",
+    "UGUI",
+    "UI Sounds"
+  ],
+  "author": {
+    "name": "Fellipe Peixoto",
+    "email": "devpeixoto@gmail.com",
+    "url": "https://www.devpeixoto.com/gamedeveloper"
+  }
+}
