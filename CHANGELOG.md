@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Presets
 
 ### Changed
-- Rename GlobalUiEventsManager -> SelectablesListenerManager
+- Changed GenericEventForwarder name to SelectableEventForwarder
+- Remove awake from event forwarder. Using init to initialize the component
 
 ### Deprecated
 - Nothing yet
@@ -21,7 +22,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Nothing yet
 
 ### Fixed
-- Nothing yet
+- Fix deregister events
+
+## [0.1.1] - 2025-10-08
+
+### Fixed
+- Fix deregister events
+
+### Changed
+- Changed GenericEventForwarder name to SelectableEventForwarder
 
 ## [0.1.0] - 2025-10-07
 

@@ -1,6 +1,6 @@
 {
   "name": "com.devpeixoto.globaluievents",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Global UI Events",
   "description": "Listens for UI events triggered by user navigation only (Move, Click).",
   "unity": "6000.0",

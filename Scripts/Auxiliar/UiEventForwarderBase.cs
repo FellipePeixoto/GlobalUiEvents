@@ -13,7 +13,6 @@ namespace DevPeixoto.UI.GlobalUiEvents
 
         internal SelectablesListenerManager manager;
         protected Selectable selectable;
-        protected GameObject caller;
         protected SelectableEventOverrider overrider;
         protected static T cachedGlobalEvntData;
 
@@ -30,15 +29,11 @@ namespace DevPeixoto.UI.GlobalUiEvents
 
         public SelectableEventOverrider Overrider { get => overrider; }
 
-        protected virtual void Awake()
-        {
-            caller = gameObject;
-            selectable = GetComponent<Selectable>();
-        }
+        public abstract void Init();
 
         public virtual void OnSubmit(BaseEventData eventData)
         {                
-            cachedGlobalEvntData.caller = selectable;
+            cachedGlobalEvntData.caller = Selectable;
             cachedGlobalEvntData.overrider = overrider;
             cachedGlobalEvntData.eventData = eventData;
             onClick?.Invoke(cachedGlobalEvntData);
@@ -46,7 +41,7 @@ namespace DevPeixoto.UI.GlobalUiEvents
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            cachedGlobalEvntData.caller = selectable;
+            cachedGlobalEvntData.caller = Selectable;
             cachedGlobalEvntData.overrider = overrider;
             cachedGlobalEvntData.eventData = eventData;
             onClick?.Invoke(cachedGlobalEvntData);
@@ -54,7 +49,7 @@ namespace DevPeixoto.UI.GlobalUiEvents
 
         public virtual void OnMove(AxisEventData eventData)
         {
-            cachedGlobalEvntData.caller = selectable;
+            cachedGlobalEvntData.caller = Selectable;
 
             int instanceId = eventData.selectedObject.GetInstanceID();
             SelectableEventOverrider selectedOverrider = manager.GetOverrider(instanceId);
@@ -66,12 +61,12 @@ namespace DevPeixoto.UI.GlobalUiEvents
 
         public virtual void OnSelect(BaseEventData eventData)
         {
-            cachedGlobalEvntData.caller = selectable;
+            cachedGlobalEvntData.caller = Selectable;
             cachedGlobalEvntData.overrider = overrider;
             cachedGlobalEvntData.eventData = eventData;
         }
 
-        protected virtual void OnDisable()
+        protected virtual void OnDestroy()
         {
             onClick?.RemoveAllListeners();
             onMove?.RemoveAllListeners();

@@ -40,7 +40,11 @@ Contributions are welcome! Open an issue or submit a pull request.
 
 ## Future Roadmap
 
-- Allow creating a new preset directly from the inspector.
+- [ ] Allow creating a new preset directly from the inspector
+- [ ] Positive/Negative sounds for Up and Down or Right and Left
+- [ ] Positive/Negative sounds for Right and Left on Slide
+- [ ] To separeted sounds after slider meets it's lowest or higher values
+- [ ] Decouple Play Audio `SelectablesListenerManager` to enable take advantage from other audio system solutions
 
 ## License
 

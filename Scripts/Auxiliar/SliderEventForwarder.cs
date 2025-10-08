@@ -3,11 +3,9 @@ namespace DevPeixoto.UI.GlobalUiEvents
 {
     public class SliderEventForwarder : UiEventForwarderBase<SliderGlobalEvntsData> 
     {
-        protected override void Awake()
+        public override void Init()
         {
-            base.Awake();
-
-            overrider = GetComponent<SelectableEventOverrider>();
+            overrider = GetComponent<SliderEventOverrider>();
             if (cachedGlobalEvntData == null)
                 cachedGlobalEvntData = new SliderGlobalEvntsData();
         }

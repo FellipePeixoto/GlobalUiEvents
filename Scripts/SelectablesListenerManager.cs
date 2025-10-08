@@ -71,6 +71,7 @@ namespace DevPeixoto.UI.GlobalUiEvents
                 case Slider slider:
                     var sliderEvntFwd = selectable.gameObject.AddComponent<SliderEventForwarder>();
                     sliderEvntFwd.manager = this;
+                    sliderEvntFwd.Init();
                     sliderEvntFwd.onClick.AddListener(OnClick);
                     sliderEvntFwd.onMove.AddListener(OnMove);
 
@@ -79,8 +80,9 @@ namespace DevPeixoto.UI.GlobalUiEvents
                     break;
 
                 default:
-                    var genericEvntFwd = selectable.gameObject.AddComponent<GenericEventForwarder>();
+                    var genericEvntFwd = selectable.gameObject.AddComponent<SelectableEventForwarder>();
                     genericEvntFwd.manager = this;
+                    genericEvntFwd.Init();
                     genericEvntFwd.onClick.AddListener(OnClick);
                     genericEvntFwd.onMove.AddListener(OnMove);
                     

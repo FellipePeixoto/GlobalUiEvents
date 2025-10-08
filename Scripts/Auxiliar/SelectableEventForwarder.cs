@@ -1,12 +1,10 @@
 
 namespace DevPeixoto.UI.GlobalUiEvents
 {
-    public class GenericEventForwarder : UiEventForwarderBase<GenericGlobalEvntsData> 
+    public class SelectableEventForwarder : UiEventForwarderBase<GenericGlobalEvntsData> 
     {
-        protected override void Awake()
+        public override void Init()
         {
-            base.Awake();
-
             overrider = GetComponent<SelectableEventOverrider>();
             if (cachedGlobalEvntData == null)
                 cachedGlobalEvntData = new GenericGlobalEvntsData();
