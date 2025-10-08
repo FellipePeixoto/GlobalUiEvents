@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace DevPeixoto.UI.GlobalUiEvents
 {
-    [AddComponentMenu("DevPeixoto/Global UI Events/Selectable Event Overrider")]
+    [AddComponentMenu("DevPeixoto/Global UI Events/Overriders/Selectable Event Overrider")]
     [RequireComponent(typeof(Selectable))]
     public class SelectableEventOverrider : MonoBehaviour
     {

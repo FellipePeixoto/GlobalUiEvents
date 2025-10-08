@@ -1,30 +1,22 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace DevPeixoto.UI.GlobalUiEvents
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(RectTransform))]
-    public class GlobalUiEventsManager : MonoBehaviour
+    [AddComponentMenu("DevPeixoto/Global UI Events/Selectables Listener Manager")]
+    public class SelectablesListenerManager : MonoBehaviour
     {
         [Header("Events")]
         public UnityEvent onSelect;
 
         [Header("Sounds")]
-        public AudioMixerGroup _mixer;
-        public AudioClip _selectAudioClip;
-        public AudioClip _noNextAudioClip;
-        public AudioClip _clickAudioClip;
-        public AudioClip _clickDisabledAudioClip;
-        public AudioClip _slideAudioClip;
+        [SerializeField] AudioPresetSO _audioPreset;
 
         Dictionary<int, SelectableEventOverrider> overridersDict = new();
 
@@ -34,7 +26,7 @@ namespace DevPeixoto.UI.GlobalUiEvents
         {
             SetupSelectables();
             _audioSrcPool = AudioSrcPool.Instance;
-            _audioSrcPool.SetMixer(_mixer);
+            _audioSrcPool.SetMixer(_audioPreset.Mixer);
         }
 
         void SetupSelectables()
@@ -124,11 +116,11 @@ namespace DevPeixoto.UI.GlobalUiEvents
                     else if (sliderOverrider != null)
                     {
                         _audioSrcPool.PlayAudio(sliderOverrider.slideAudioClip);
-                        _audioSrcPool.PlayAudio(_slideAudioClip);
+                        _audioSrcPool.PlayAudio(_audioPreset.SlideAudio);
                     }
                     else
                     {
-                        _audioSrcPool.PlayAudio(_slideAudioClip);
+                        _audioSrcPool.PlayAudio(_audioPreset.SlideAudio);
                     }
 
                     return;
@@ -158,16 +150,16 @@ namespace DevPeixoto.UI.GlobalUiEvents
                 else if (eventData.overrider != null)
                 {
                     _audioSrcPool.PlayAudio(eventData.overrider.selectAudioClip);
-                    _audioSrcPool.PlayAudio(_selectAudioClip);
+                    _audioSrcPool.PlayAudio(_audioPreset.SelectAudio);
                 }
                 else
                 {
-                    _audioSrcPool.PlayAudio(_selectAudioClip);
+                    _audioSrcPool.PlayAudio(_audioPreset.SelectAudio);
                 }
             }
             else
             {
-                _audioSrcPool.PlayAudio(_noNextAudioClip);
+                _audioSrcPool.PlayAudio(_audioPreset.NoNextAudio);
             }
         }
 
@@ -182,11 +174,11 @@ namespace DevPeixoto.UI.GlobalUiEvents
                 else if (eventData.overrider != null)
                 {
                     _audioSrcPool.PlayAudio(eventData.overrider.clickAudioClip);
-                    _audioSrcPool.PlayAudio(_clickAudioClip);
+                    _audioSrcPool.PlayAudio(_audioPreset.ClickAudio);
                 }
                 else
                 {
-                    _audioSrcPool.PlayAudio(_clickAudioClip);
+                    _audioSrcPool.PlayAudio(_audioPreset.ClickAudio);
                 }
             }
             else
@@ -198,11 +190,11 @@ namespace DevPeixoto.UI.GlobalUiEvents
                 else if (eventData.overrider != null)
                 {
                     _audioSrcPool.PlayAudio(eventData.overrider.clickDisabledAudioClip);
-                    _audioSrcPool.PlayAudio(_clickDisabledAudioClip);
+                    _audioSrcPool.PlayAudio(_audioPreset.ClickDisabledAudio);
                 }
                 else
                 {
-                    _audioSrcPool.PlayAudio(_clickDisabledAudioClip);
+                    _audioSrcPool.PlayAudio(_audioPreset.ClickDisabledAudio);
                 }
             }
         }

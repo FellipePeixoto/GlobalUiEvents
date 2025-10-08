@@ -11,7 +11,7 @@ namespace DevPeixoto.UI.GlobalUiEvents
         [HideInInspector] public UnityEvent<GlobalEventsData> onClick = new UnityEvent<GlobalEventsData>();
         [HideInInspector] public UnityEvent<GlobalEventsData> onMove = new UnityEvent<GlobalEventsData>();
 
-        internal GlobalUiEventsManager manager;
+        internal SelectablesListenerManager manager;
         protected Selectable selectable;
         protected GameObject caller;
         protected SelectableEventOverrider overrider;

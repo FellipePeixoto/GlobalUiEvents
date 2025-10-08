@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace DevPeixoto.UI.GlobalUiEvents
 {
-    [AddComponentMenu("DevPeixoto/Global UI Events/Slider Event Overrider")]
+    [AddComponentMenu("DevPeixoto/Global UI Events/Overriders/Slider Event Overrider")]
     [RequireComponent(typeof(Slider))]
     public class SliderEventOverrider : SelectableEventOverrider
     {
