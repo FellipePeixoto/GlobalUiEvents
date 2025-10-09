@@ -38,7 +38,8 @@ namespace DevPeixoto.UI.GlobalUiEvents
             }
         }
 
-        public void AddNewSelectables()
+        // REVIEW: It Should remove the unused as well?
+        public void RefreshSelectables()
         {
             GameObject[] included = overridersDict.Values.Select(x => x.gameObject).ToArray();
             Selectable[] all = GetComponentsInChildren<Selectable>(true);
@@ -49,18 +50,6 @@ namespace DevPeixoto.UI.GlobalUiEvents
                     continue;
 
                 AddSelectable(item);
-            }
-        }
-
-        public void CleanUpSelectables()
-        {
-            Selectable[] all = GetComponentsInChildren<Selectable>(true);
-
-            foreach (Selectable item in all)
-            {
-                int id = item.gameObject.GetInstanceID();
-                if (overridersDict.ContainsKey(id))
-                    overridersDict.Remove(id);
             }
         }
 
@@ -90,14 +79,6 @@ namespace DevPeixoto.UI.GlobalUiEvents
                         overridersDict.Add(selectable.gameObject.GetInstanceID(), genericEvntFwd.Overrider);
                     break;
             }
-        }
-
-        public SelectableEventOverrider GetOverrider(int instanceId)
-        {
-            if (!overridersDict.ContainsKey(instanceId))
-                return null;
-
-            return overridersDict[instanceId];
         }
 
         void OnMove(GlobalEventsData eventData)
@@ -199,6 +180,21 @@ namespace DevPeixoto.UI.GlobalUiEvents
                     _audioSrcPool.PlayAudio(_audioPreset.ClickDisabledAudio);
                 }
             }
+        }
+
+        public SelectableEventOverrider GetOverrider(int instanceId)
+        {
+
+            if (!overridersDict.ContainsKey(instanceId))
+                return null;
+
+            if (overridersDict[instanceId] == null)
+            {
+                overridersDict.Remove(instanceId);
+                return null;
+            }
+
+            return overridersDict[instanceId];
         }
     }
 }
