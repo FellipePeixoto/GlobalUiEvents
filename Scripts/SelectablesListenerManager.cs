@@ -74,7 +74,7 @@ namespace DevPeixoto.UI.GlobalUiEvents
                     genericEvntFwd.Init();
                     genericEvntFwd.onClick.AddListener(OnClick);
                     genericEvntFwd.onMove.AddListener(OnMove);
-                    
+
                     if (genericEvntFwd.Overrider != null)
                         overridersDict.Add(selectable.gameObject.GetInstanceID(), genericEvntFwd.Overrider);
                     break;
@@ -83,66 +83,13 @@ namespace DevPeixoto.UI.GlobalUiEvents
 
         void OnMove(GlobalEventsData eventData)
         {
-            if ((eventData.eventData is AxisEventData axisEventData) && (eventData.caller is Slider slider))
+            if (eventData.eventData is AxisEventData)
             {
-                if (axisEventData.moveDir == MoveDirection.Right || axisEventData.moveDir == MoveDirection.Left)
-                {
-                    SliderEventOverrider sliderOverrider = eventData.overrider as SliderEventOverrider;
-
-                    if (sliderOverrider != null)
-                        sliderOverrider.onMove?.Invoke();
-
-                    if (sliderOverrider != null && sliderOverrider.overrideSlideAudio)
-                    {
-                        _audioSrcPool.PlayAudio(sliderOverrider.slideAudioClip);
-                    }
-                    else if (sliderOverrider != null)
-                    {
-                        _audioSrcPool.PlayAudio(sliderOverrider.slideAudioClip);
-                        _audioSrcPool.PlayAudio(_audioPreset.SlideAudio);
-                    }
-                    else
-                    {
-                        _audioSrcPool.PlayAudio(_audioPreset.SlideAudio);
-                    }
-
-                    return;
-                }
-            }
-
-            if (eventData.caller.gameObject != eventData.eventData.selectedObject)
-            {
-                if (eventData.overrider != null && eventData.overrider.overrideSelectEvent)
-                {
-                    eventData.overrider.onSelect?.Invoke();
-                }
-                else if (eventData.overrider != null)
-                {
-                    eventData.overrider.onSelect?.Invoke();
-                    onSelect?.Invoke();
-                }
-                else
-                {
-                    onSelect?.Invoke();
-                }
-
-                if (eventData.overrider != null && eventData.overrider.overrideSelectAudio)
-                {
-                    _audioSrcPool.PlayAudio(eventData.overrider.selectAudioClip);
-                }
-                else if (eventData.overrider != null)
-                {
-                    _audioSrcPool.PlayAudio(eventData.overrider.selectAudioClip);
-                    _audioSrcPool.PlayAudio(_audioPreset.SelectAudio);
-                }
-                else
-                {
-                    _audioSrcPool.PlayAudio(_audioPreset.SelectAudio);
-                }
+                HandleAxisEventData(eventData);
             }
             else
             {
-                _audioSrcPool.PlayAudio(_audioPreset.NoNextAudio);
+                Debug.LogError("OnMove didn't trigger an AxisEventData");
             }
         }
 
@@ -179,6 +126,76 @@ namespace DevPeixoto.UI.GlobalUiEvents
                 {
                     _audioSrcPool.PlayAudio(_audioPreset.ClickDisabledAudio);
                 }
+            }
+        }
+
+        void HandleAxisEventData(GlobalEventsData eventData)
+        {
+            switch (eventData)
+            {
+                case SliderGlobalEvntsData:
+                    AxisEventData axisEventData = eventData.eventData as AxisEventData;
+
+                    if (axisEventData.moveDir == MoveDirection.Right || axisEventData.moveDir == MoveDirection.Left)
+                    {
+                        SliderEventOverrider sliderOverrider = eventData.overrider as SliderEventOverrider;
+
+                        if (sliderOverrider != null)
+                            sliderOverrider.onMove?.Invoke();
+
+                        if (sliderOverrider != null && sliderOverrider.overrideSlideAudio)
+                        {
+                            _audioSrcPool.PlayAudio(sliderOverrider.slideAudioClip);
+                        }
+                        else if (sliderOverrider != null)
+                        {
+                            _audioSrcPool.PlayAudio(sliderOverrider.slideAudioClip);
+                            _audioSrcPool.PlayAudio(_audioPreset.SlideAudio);
+                        }
+                        else
+                        {
+                            _audioSrcPool.PlayAudio(_audioPreset.SlideAudio);
+                        }
+                    }
+                    break;
+
+                case SelectableGlobalEvntsData:
+
+                    if (eventData.caller.gameObject != eventData.eventData.selectedObject)
+                    {
+                        if (eventData.overrider != null && eventData.overrider.overrideSelectEvent)
+                        {
+                            eventData.overrider.onSelect?.Invoke();
+                        }
+                        else if (eventData.overrider != null)
+                        {
+                            eventData.overrider.onSelect?.Invoke();
+                            onSelect?.Invoke();
+                        }
+                        else
+                        {
+                            onSelect?.Invoke();
+                        }
+
+                        if (eventData.overrider != null && eventData.overrider.overrideSelectAudio)
+                        {
+                            _audioSrcPool.PlayAudio(eventData.overrider.selectAudioClip);
+                        }
+                        else if (eventData.overrider != null)
+                        {
+                            _audioSrcPool.PlayAudio(eventData.overrider.selectAudioClip);
+                            _audioSrcPool.PlayAudio(_audioPreset.SelectAudio);
+                        }
+                        else
+                        {
+                            _audioSrcPool.PlayAudio(_audioPreset.SelectAudio);
+                        }
+                    }
+                    else
+                    {
+                        _audioSrcPool.PlayAudio(_audioPreset.NoNextAudio);
+                    }
+                    break;
             }
         }
 

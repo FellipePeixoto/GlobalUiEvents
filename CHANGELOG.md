@@ -12,8 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Presets
 
 ### Changed
-- Changed GenericEventForwarder name to SelectableEventForwarder
-- Remove awake from event forwarder. Using init to initialize the component
+- Changed method signature AddNewSelectables to RefreshSelectables
 
 ### Deprecated
 - Nothing yet
@@ -22,7 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Nothing yet
 
 ### Fixed
-- Fix deregister events
+- Correct use of Event Data Logic
+
+## [0.1.1] - 2025-10-08
+
+### Changed
+- Changed method signature AddNewSelectables to RefreshSelectables
+
+### Fixed
+- Correct use of Event Data Logic
 
 ## [0.1.1] - 2025-10-08
 

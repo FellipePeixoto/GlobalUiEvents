@@ -51,7 +51,9 @@ namespace DevPeixoto.UI.GlobalUiEvents
         {
             cachedGlobalEvntData.caller = Selectable;
 
+            // The Overrider must be the selected object and not the caller
             int instanceId = eventData.selectedObject.GetInstanceID();
+            // Get the overrider hold by the his manager
             SelectableEventOverrider selectedOverrider = manager.GetOverrider(instanceId);
             cachedGlobalEvntData.overrider = selectedOverrider;
 
